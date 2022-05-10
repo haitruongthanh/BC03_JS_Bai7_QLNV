@@ -57,6 +57,7 @@ var deleteStaff = function (staffAcc) {
   saveToLocal();
 };
 
+//Update nhân viên
 var modifyStaff = function (staffAcc) {
   var index = findIndexStaff(staffAcc, staffList);
   var staff = staffList[index];
@@ -74,5 +75,19 @@ var updateStaff = function () {
     putToTable(staffList);
     resetForm();
     $("#myModal").modal("hide");
+  }
+};
+
+var search = function () {
+  var inputSearch = document.getElementById("searchName").value.trim();
+
+  var resultsList = staffList.filter(function (staff) {
+    return staff.xepLoai().toUpperCase().includes(inputSearch.toUpperCase());
+  });
+
+  if (resultsList.length != 0) {
+    putToTable(resultsList);
+  } else {
+    putToTable(staffList);
   }
 };
